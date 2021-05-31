@@ -3,30 +3,22 @@ import turtle
 from os import system as cmd
 from pynput.keyboard import Key, Controller
 from threading import Thread
-from _thread import interrupt_main
-from time import time, sleep
+from time import sleep
 from win32gui import IsWindowVisible, EnumWindows, GetWindowText
 
-def revision_de_ventana():
+def revision_de_ventana(aplicacion):
 
     def winEnumHandler(hwnd, list):
         if IsWindowVisible(hwnd):
             r = {'nombre': GetWindowText(hwnd)}
             if 'Nueva pestaña - Google Chrome' == r.get('nombre'):
-                print('Está')
                 list.append(0)
-            else:
-                print('No está')
 
-    inicio = time()
     while True:
         list = []
         EnumWindows(winEnumHandler, list)
         try:
             if list[0] == 0:
-                print(list)
-                final = time() - inicio
-                print(f'{final}')
                 break
         except:
             continue
@@ -41,10 +33,10 @@ def revision_de_ventana():
     control.release(Key.ctrl)
     control.release('d')
     control.press(Key.cmd)
-    control.press('5')
+    control.press(aplicacion)
     control.release(Key.cmd)
-    control.release('5')
-    interrupt_main()
+    control.release(aplicacion)
+    root.quit()
 
 
 root = Tk()
@@ -69,7 +61,7 @@ saludo_label = Label(principal_frame, text='Hola, elige una configuración',
 
 def python_development():
     cmd('start chrome')
-    verificador = Thread(target=revision_de_ventana)
+    verificador = Thread(target=revision_de_ventana('5'))
     verificador.start()
 
 boton_python = Button(root, text="Conf. Python", command=python_development).place(x=70, y=260)
@@ -87,9 +79,12 @@ def conf_escolar():
 boton_escolar = Button(root, text="Conf. Escolar", command=conf_escolar).place(x=250, y=300)
 
 def conf_visual():
-    pass
+    cmd('start chrome')
+    verificador = Thread(target=revision_de_ventana('3'))
+    verificador.start()
 
-boton_visual = Button(root, text='Conf. VSC', command=conf_visual()).place(x=250, y=260)
+
+boton_visual = Button(root, text='Conf. VSC', command=conf_visual).place(x=250, y=260)
 
 principal_frame.pack()
 

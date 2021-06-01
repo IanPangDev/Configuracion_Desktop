@@ -43,6 +43,7 @@ root = Tk()
 root.title("選べ")
 root.iconbitmap("ENG.ico")
 root.resizable(False, False)
+root.config(bg='black')
 
 #Centra la ventana
 window_width = 400
@@ -54,9 +55,20 @@ y_cordinate = int((screen_height/2) - (window_height/2))
 root.geometry("{}x{}+{}+{}".format(window_width, window_height, x_cordinate, y_cordinate))
 #Centra la ventana
 
-principal_frame = Frame(root, width="400", height="350", bg='black')
+canvas = Canvas(master=root, width=150, height=150)
+canvas.pack(pady=20)
+canvas.update()
 
-saludo_label = Label(principal_frame, text='Hola, elige una configuración',
+screen = turtle.TurtleScreen(canvas)
+screen.bgcolor('black')
+dibujo = turtle.RawTurtle(screen)
+dibujo.color('white')
+dibujo.hideturtle()
+dibujo.penup()
+dibujo.setposition(0,-45)
+dibujo.write("伍", align='center', font=("Times New Roman", 70, "bold"))
+
+saludo_label = Label(root, text='Hola, elige una configuración',
                      fg="white", bg='black').place(x=120, y=200)
 
 def python_development():
@@ -85,7 +97,5 @@ def conf_visual():
 
 
 boton_visual = Button(root, text='Conf. VSC', command=conf_visual).place(x=250, y=260)
-
-principal_frame.pack()
 
 root.mainloop()

@@ -65,7 +65,7 @@ dibujo = turtle.RawTurtle(screen)
 dibujo.color('white')
 dibujo.hideturtle()
 dibujo.penup()
-dibujo.setposition(0,-45)
+dibujo.setposition(0,-50)
 dibujo.write("伍", align='center', font=("Times New Roman", 70, "bold"))
 
 saludo_label = Label(root, text='Hola, elige una configuración',
@@ -79,14 +79,14 @@ def python_development():
 boton_python = Button(root, text="Conf. Python", command=python_development).place(x=70, y=260)
 
 def sin_conf():
-    exit()
+    root.quit()
 
 boton_sin_configuracion = Button(root, text="Sin configuración", command=sin_conf).place(x=70, y=300)
 
 def conf_escolar():
     cmd('start chrome https://classroom.google.com/')
     cmd('start C:\\Users\\Wuchang\\AppData\\Roaming\\Zoom\\bin\\Zoom.exe')
-    exit()
+    root.quit()
 
 boton_escolar = Button(root, text="Conf. Escolar", command=conf_escolar).place(x=250, y=300)
 

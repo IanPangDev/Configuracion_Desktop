@@ -41,7 +41,7 @@ def revision_de_ventana(aplicacion):
 
 root = Tk()
 root.title("選べ")
-root.iconbitmap("ENG.ico")
+root.iconbitmap(".ico\\ENG.ico")
 root.resizable(False, False)
 root.config(bg='black')
 

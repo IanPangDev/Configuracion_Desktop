@@ -5,35 +5,7 @@ from pynput.keyboard import Key, Controller
 from threading import Thread
 from win32gui import IsWindowVisible, EnumWindows, GetWindowText
 
-class Mythread1(Thread):
-    def __init__(self, threadID, aplicacion):
-        Thread.__init__(self)
-        self.threadID = threadID
-        self.aplicacion = aplicacion
-
-    def comandos(self):
-        verifica = Mythread2(2)
-        verifica.revisar_pantalla()
-        verifica.start()
-        verifica.join()
-        control = Controller()
-        control.press(Key.ctrl)
-        control.press(Key.cmd)
-        control.press('d')
-        control.release(Key.cmd)
-        control.release(Key.ctrl)
-        control.release('d')
-        control.press(Key.cmd)
-        control.press(self.aplicacion)
-        control.release(Key.cmd)
-        control.release(self.aplicacion)
-        root.quit()
-
-class Mythread2(Thread):
-    def __init__(self, threadID):
-        Thread.__init__(self)
-        self.threadID = threadID
-
+class Mythreads():
     def revisar_pantalla(self):
         def ventanas(hwnd, list):
             if IsWindowVisible(hwnd):
@@ -49,6 +21,24 @@ class Mythread2(Thread):
                     break
             except:
                 continue
+
+    def comandos(self, aplicacion):
+        self.aplicacion = aplicacion
+        verifica = Thread(target=self.revisar_pantalla())
+        verifica.start()
+        verifica.join()
+        control = Controller()
+        control.press(Key.ctrl)
+        control.press(Key.cmd)
+        control.press('d')
+        control.release(Key.cmd)
+        control.release(Key.ctrl)
+        control.release('d')
+        control.press(Key.cmd)
+        control.press(aplicacion)
+        control.release(Key.cmd)
+        control.release(aplicacion)
+        root.quit()
 
 class MainAplication(Frame):
     def __init__(self, parent):
@@ -91,9 +81,8 @@ class MainAplication(Frame):
         #Procesos
         def python_development():
             cmd('start chrome')
-            verificador = Mythread1(1, '5')
-            verificador.comandos()
-            verificador.start()
+            verificador = Mythreads()
+            Thread(target=verificador.comandos('5')).start()
 
         def sin_conf():
             root.quit()
@@ -105,9 +94,8 @@ class MainAplication(Frame):
 
         def conf_visual():
             cmd('start chrome')
-            verificador = Mythread1(1, '3')
-            verificador.comandos()
-            verificador.start()
+            verificador = Mythreads()
+            Thread(target=verificador.comandos('3')).start()
         # Procesos
 
         # Botones

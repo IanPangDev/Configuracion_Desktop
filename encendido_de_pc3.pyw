@@ -58,6 +58,7 @@ class MainAplication(Frame):
         # Caracteristicas de la ventana
         self.parent.title("選べ")
         self.parent.iconbitmap("ENG.ico")
+        #self.parent.iconbitmap(".icon\\ENG.ico") Para version de escritorio
         self.parent.resizable(False, False)
         self.parent.config(bg='black')
         # Caracteristicas de la ventana

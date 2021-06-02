@@ -1,4 +1,4 @@
 python = 3.8
-pynput
+pynput == 1.6.8
 pyvda
 pywin32

@@ -2,43 +2,7 @@ from tkinter import Frame, Canvas, Label, Button, Tk
 from turtle import TurtleScreen, RawTurtle
 from os import system as cmd
 from pynput.keyboard import Key, Controller
-from threading import Thread
 from win32gui import IsWindowVisible, EnumWindows, GetWindowText
-
-class Mythreads():
-    def revisar_pantalla(self):
-        def ventanas(hwnd, list):
-            if IsWindowVisible(hwnd):
-                r = {'nombre': GetWindowText(hwnd)}
-                if 'Nueva pestaña - Google Chrome' == r.get('nombre'):
-                    list.append(0)
-
-        while True:
-            list = []
-            EnumWindows(ventanas, list)
-            try:
-                if list[0] == 0:
-                    break
-            except:
-                continue
-
-    def comandos(self, aplicacion):
-        self.aplicacion = aplicacion
-        verifica = Thread(target=self.revisar_pantalla())
-        verifica.start()
-        verifica.join()
-        control = Controller()
-        control.press(Key.ctrl)
-        control.press(Key.cmd)
-        control.press('d')
-        control.release(Key.cmd)
-        control.release(Key.ctrl)
-        control.release('d')
-        control.press(Key.cmd)
-        control.press(aplicacion)
-        control.release(Key.cmd)
-        control.release(aplicacion)
-        root.quit()
 
 class MainAplication(Frame):
     def __init__(self, parent):
@@ -81,8 +45,12 @@ class MainAplication(Frame):
         #Procesos
         def python_development():
             cmd('start chrome')
-            verificador = Mythreads()
-            Thread(target=verificador.comandos('5')).start()
+            control = Controller()
+            control.press(Key.cmd)
+            control.press('5')
+            control.release(Key.cmd)
+            control.release('5')
+            root.quit()
 
         def sin_conf():
             root.quit()
@@ -94,8 +62,12 @@ class MainAplication(Frame):
 
         def conf_visual():
             cmd('start chrome')
-            verificador = Mythreads()
-            Thread(target=verificador.comandos('3')).start()
+            control = Controller()
+            control.press(Key.cmd)
+            control.press('3')
+            control.release(Key.cmd)
+            control.release('3')
+            root.quit()
         # Procesos
 
         # Botones

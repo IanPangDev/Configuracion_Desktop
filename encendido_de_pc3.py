@@ -2,7 +2,6 @@ from tkinter import Frame, Canvas, Label, Button, Tk
 from turtle import TurtleScreen, RawTurtle
 from os import system as cmd
 from pynput.keyboard import Key, Controller
-from win32gui import IsWindowVisible, EnumWindows, GetWindowText
 
 class MainAplication(Frame):
     def __init__(self, parent):
